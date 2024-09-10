@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.backendkurssi.bookstore.domain.Book;
 import fi.backendkurssi.bookstore.domain.BookRepository;
+import fi.backendkurssi.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
     @Autowired
     private BookRepository repository;
+    @Autowired
+    private CategoryRepository crepository;
 
     @RequestMapping(value = { "/", "/booklist" })
     public String bookList(Model model) {
@@ -24,6 +27,7 @@ public class BookController {
         @RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
+        model.addAttribute("categorys", crepository.findAll());
         return "addbook";
     }     
     
@@ -43,6 +47,7 @@ public class BookController {
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         Book book = repository.findById(bookId).orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + bookId));
         model.addAttribute("book", book);
+        model.addAttribute("categorys", crepository.findAll());
         return "editbook";
     }
 

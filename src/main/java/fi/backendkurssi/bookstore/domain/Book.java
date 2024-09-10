@@ -1,9 +1,6 @@
 package fi.backendkurssi.bookstore.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Book {
@@ -16,16 +13,21 @@ public class Book {
     private double price;
     private int publicationYear;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
+
     public Book() {
     }
 
-    
-    public Book(String title, String author, String isbn, double price, int publicationYear) {
+   public Book(String title, String author, String isbn, double price, int publicationYear, Category category) {
+        super();
         this.title = title;
         this.author = author;
         this.isbn = isbn;
         this.price = price;
         this.publicationYear = publicationYear;
+        this.category = category;
     }
 
 
@@ -75,6 +77,16 @@ public class Book {
 
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
+    }
+
+
+    public Category getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     
