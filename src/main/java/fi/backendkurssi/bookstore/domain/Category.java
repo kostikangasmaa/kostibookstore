@@ -43,17 +43,17 @@ public class Category {
         this.books = books;
     }
 
-    public Long getCategoryid() {
+    public Long getcategoryid() {
         return categoryid;
     }
 
-    public void setCategoryid(Long categoryid) {
+    public void setcategoryid(Long categoryid) {
         this.categoryid = categoryid;
     }
     
     @Override
     public String toString() {
-        return "Category [categoryid=" + categoryid + ", name=" + name + "]";
+        return "Category [catid=" + categoryid + ", name=" + name + "]";
     }
 
 }
